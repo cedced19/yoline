@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta name='viewport' content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+        <title>Yoline Dashboard</title>
+        <link rel="stylesheet" href="/stylesheets/dashboard.css">
+        <link rel="stylesheet" href="/stylesheets/ionicons.css">
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    </head>
+    <body>
+        <header>
+            <div class="logo">
+                <i class="ion-ios7-paper-outline"></i>
+                <p>Yoline</p>
+            </div>
+            <div class="header-content" id="header-content">
+                <div class="breadcrumb" id="breadcrumb">
+                    <div class="br-content">
+                        <span class="home">
+                            <a href="#">DASHBOARD</a>
+                        </span>
+                        <span class="path-divider">/</span>
+                        <span class="link">
+                            <a href="#">Users</a>
+                        </span>
+                        <span class="path-divider">/</span>
+                        <span class="text">
+                            <p>Add an user</p>
+                        </span>
+                    </div>
+                </div>
+                <div class="search-form">
+                    <form action="#">
+                        <input type="text" name="search" class="search-input" id="search-input">
+                        <button type="submit" id="search-responsive">
+                            <i class="ion-search"></i>
+                        </button>
+                        <button type="submit" id="search-close">
+                            <i class="ion-close-round"></i>
+                        </button>
+                    </form>
+                </div>
+                <div class="account" id="account">
+                        <img src="/images/avatar.jpg" alt="">
+                        <i class="ion-chevron-down" id='ico-account'></i>
+                </div>
+                <div class="topmenu hide" id="topbar-menu">
+                    <a href=""><i class="ion-person"></i> My account</a>
+                    <a href=""><i class="ion-power"></i> Sign out</a>
+                </div>
+            </div>
+        </header>
+        <div class="nav-button-responsive" id="nav-button-responsive">
+            <i class="ion-navicon-round"></i>
+        </div>
+        <div class="nav" id="nav">
+            <div class="menu">
+                <a href="#">
+                    <i class="ion-home"></i><span> Dashboard</span>
+                    </a>
+            </div>
+            <div class="submenu" id="submenu">
+                <a href="#"><i class="ion-person"><span> Users</span></i> <i class="ion-chevron-right right" id="icon"></i></a>
+                <div class="sub-content hide" id="sub-content">
+                    <a href="#"> Add an user</a>
+                    <a href="#"> Statistics</a>
+                </div>
+            </div>
+            <div class="submenu" id="submenu">
+                <a href="#"><i class="ion-edit"></i><span> Articles</span><i class="ion-chevron-right right " id="icon"></i></a>
+                <div class="sub-content hide" id="sub-content">
+                    <a href="#"> New article</a>
+                    <a href="#"> Articles</a>
+                    <a href="#"> Drafts</a>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+        </div>
+        <div class="footer">
+            <div class="company">
+                <a href="http://cedced19.github.io">Cedced19</a>
+            </div>
+            <div class="link">
+                <a href="https://github.com/cedced19/yoline">About</a>
+                <div class="separator">|</div>
+                <a href="https://github.com/cedced19/yoline/wiki">Help</a>
+                <div class="separator">|</div>
+                <a href="https://github.com/cedced19/yoline/issues">Feedback</a>
+                <div class="separator">|</div>
+                <a href="http://cedced19.github.io/license">License</a>
+            </div>
+        </div>
+    </body>
+    <script type="text/javascript" src="/javascripts/jquery.min.js"></script>
+    <script type="text/javascript" src="/javascripts/dashboard/ui-init.js"></script>
+</html>
