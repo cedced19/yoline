@@ -4,10 +4,17 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var browserify = require('browserify-middleware');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var hash = require('password-hash');
+var flash = require('connect-flash');
+var session = require('express-session');
 
-var routes = require('./routes/index');
+var index = require('./routes/index');
 var dashboard = require('./routes/dashboard');
-var api = require('./routes/api');
+var articles = require('./routes/articles-api');
+var users = require('./routes/users-api');
 
 var app = express();
 
@@ -25,13 +32,67 @@ app.use(require('node-sass-middleware')({
   dest: path.join(__dirname, 'public'),
   indentedSyntax: true,
   outputStyle: 'compressed',
-  sourceMap: true
+  sourceMap: false
+}));
+app.use('/javascripts/dashboard.js', browserify(__dirname + '/public/javascripts/dashboard/index.js', {
+  debug: true,
+  minify: true
 }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(flash());
+app.use(session({
+    secret: 'yoline loves rock',
+    name: 'yoline-session',
+    proxy: false,
+    resave: true,
+    saveUninitialized: true
+}));
 
-app.use('/', routes);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use('/', index);
 app.use('/dashboard', dashboard);
-app.use('/api', api);
+app.use('/api/articles', articles);
+app.use('/api/users', users);
+
+passport.serializeUser(function(model, done) {
+        done(null, model.id);
+    });
+
+passport.deserializeUser(function(id, done) {
+      app.models.users.findOne({ id: id } , function (err, model) {
+          done(err, model);
+      });
+});
+
+passport.use('local', new LocalStrategy({
+      usernameField: 'mail',
+      passwordField: 'password'
+},
+function(mail, password, done) {
+        app.models.users.findOne({ mail: mail }, function (err, model) {
+          if (err) { return done(err); }
+          if (!model) {
+            return done(null, false, { message: 'Incorrect email.' });
+          }
+
+          if(hash.verify(password, model.password)) {
+            var returnmodel = {
+                mail: model.mail,
+                id: model.id
+              };
+              return done(null, returnmodel, {
+                message: 'Logged in successfully.'
+              });
+          } else {
+            return done(null, false, {
+                message: 'Invalid password.'
+            });
+          }
+        });
+}));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

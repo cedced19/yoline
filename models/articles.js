@@ -1,7 +1,7 @@
 var Waterline = require('Waterline');
 
 var Articles = Waterline.Collection.extend({
-    identity: 'lesson',
+    identity: 'articles',
     connection: 'save',
 
     attributes: {

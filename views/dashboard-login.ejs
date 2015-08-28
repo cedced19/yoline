@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta name='viewport' content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+        <title>Yoline Dashboard</title>
+        <link rel="stylesheet" href="/stylesheets/dashboard.css">
+    </head>
+    <body>
+        <header>
+            <div class="logo">
+                <i class="ion-ios-paper-outline"></i>
+                <p>Yoline</p>
+            </div>
+            <div class="header-content">
+                <div class="breadcrumb breadcrumb-login">
+                    <div class="br-content">
+                        <span class="home">
+                            <a href="#">DASHBOARD</a>
+                        </span>
+                        <span class="path-divider">/</span>
+                        <span class="link">
+                            <a href="#">Login</a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="content">
+            <h1>Login</h1>
+            <form action="/dashboard/login" method="post">
+                <div>
+                    <label>Username:</label>
+                    <input type="text" name="mail"/>
+                </div>
+                <div>
+                    <label>Password:</label>
+                    <input type="password" name="password"/>
+                </div>
+                <div>
+                    <input type="submit" value="Log In"/>
+                </div>
+            </form>
+        </div>
+        <div class="footer">
+            <div class="company">
+                <a href="http://cedced19.github.io">Cedced19</a>
+            </div>
+            <div class="link">
+                <a href="https://github.com/cedced19/yoline">About</a>
+                <div class="separator">|</div>
+                <a href="https://github.com/cedced19/yoline/wiki">Help</a>
+                <div class="separator">|</div>
+                <a href="https://github.com/cedced19/yoline/issues">Feedback</a>
+                <div class="separator">|</div>
+                <a href="http://cedced19.github.io/license">License</a>
+            </div>
+        </div>
+    </body>
+    <script type="text/javascript" src="/javascripts/dashboard.js"></script>
+</html>

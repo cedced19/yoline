@@ -2,7 +2,7 @@
 
 __Work in progress!__
 
-Yoline is a free and open-source content management system (CMS) based on Node.js and the new ES6.
+Yoline is a free and open-source content management system (CMS) based on Node.js.
 
 ## Why a new CMS?
 
@@ -10,7 +10,7 @@ I wanted to do blogs for friends with Node.js but I don't really like to use Gho
 
 Then I'll do myself my own CMS.
 
-I didn't use ES6, it will be a example to me.
+I didn't use Browserify and SASS, it will be an example to me.
 
 ## Why this beautiful name?
 
