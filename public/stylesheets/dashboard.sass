@@ -12,9 +12,6 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section
   display: block
 
-body
-  line-height: 1
-
 ol, ul
   list-style: none
 
@@ -35,9 +32,6 @@ table
   border-collapse: collapse
   border-spacing: 0
 
-body
-  font-family: Open Sans
-
 a
   color: #FFF
   text-decoration: none
@@ -50,6 +44,43 @@ header
 ::section
   background-color: #2494f2;
   color: #FFF
+
+*
+  box-sizing: border-box
+  &:before,
+  &:after
+    box-sizing: border-box
+
+body
+  background: #eaeaea
+  color: #999999
+  font-family: Open Sans
+  font: 400 16px/1.5em sans-serif
+  margin: 0
+  line-height: 1
+
+h3
+  margin: 0
+
+fieldset
+  border: none
+  margin: 0
+
+input
+  border: none
+  font-family: inherit
+  font-size: inherit
+  margin: 0
+  -webkit-appearance: none
+
+input:focus
+  outline: none
+
+input[type="submit"]
+  cursor: pointer
+
+input:-webkit-autofill
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
 
 .logo
   float: left
@@ -270,6 +301,85 @@ header
 
 #search-close, .nav-button-responsive
   display: none
+
+.login-error
+  width: 300px
+  border-radius: 5px
+  color: #c7254e
+  background-color: #f9f2f4
+  padding: 20px
+  position: relative
+  margin-bottom: 20px
+
+.login-form
+  width: 300px
+
+.login-form h3
+  background-color: #282830
+  border-radius: 5px 5px 0 0
+  color: #fff
+  font-size: 14px
+  padding: 20px
+  text-align: center
+  text-transform: uppercase
+
+.login-form fieldset
+  background: #fff
+  border-radius: 0 0 5px 5px
+  padding: 20px
+  position: relative
+
+.login-form fieldset:before
+  background-color: #fff
+  content: ""
+  height: 8px
+  left: 50%
+  margin: -4px 0 0 -4px
+  position: absolute
+  top: 0
+  -webkit-transform: rotate(45deg)
+  -moz-transform: rotate(45deg)
+  -ms-transform: rotate(45deg)
+  -o-transform: rotate(45deg)
+  transform: rotate(45deg)
+  width: 8px
+
+.login-form input
+  font-size: 14px
+
+.login-form input[type="email"],
+.login-form input[type="text"],
+.login-form input[type="password"]
+  border: 1px solid #dcdcdc
+  padding: 12px 10px
+  width: 100%
+
+.login-form input[type="email"]
+  border-radius: 3px 3px 0 0
+
+.login-form input[type="text"]
+  border-top: none
+  border-radius: 0
+
+.login-form input[type="password"]
+  border-top: none
+  border-radius: 0px 0px 3px 3px
+
+.login-form input[type="submit"]
+  background: #1dabb8
+  border-radius: 3px
+  color: #fff
+  float: right
+  font-weight: bold
+  margin-top: 20px
+  padding: 12px 20px
+
+.login-form input[type="submit"]:hover
+  background: #198d98
+
+.login-form footer
+  font-size: 12px
+  margin-top: 16px
 
 @media only screen and (max-width: 1024px)
   .nav

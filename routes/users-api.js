@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var app = require('../app');
 var auth = require('../policies/auth.js');
 
 /* GET Users */

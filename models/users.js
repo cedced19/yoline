@@ -14,6 +14,7 @@ var Users = Waterline.Collection.extend({
     },
 
     beforeCreate: function(user, cb) {
+        user.name = user.name.charAt(0).toUpperCase() + user.name.substring(1).toLowerCase();
         user.password = hash.generate(user.password);
         cb();
     }

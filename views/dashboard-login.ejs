@@ -27,20 +27,31 @@
             </div>
         </header>
         <div class="content">
-            <h1>Login</h1>
-            <form action="/dashboard/login" method="post">
-                <div>
-                    <label>Username:</label>
-                    <input type="text" name="mail"/>
-                </div>
-                <div>
-                    <label>Password:</label>
-                    <input type="password" name="password"/>
-                </div>
-                <div>
-                    <input type="submit" value="Log In"/>
-                </div>
-            </form>
+            <div class="login-error" style="display:<% if (error) { %>block<% } else { %>none<% } %>;"><%= error %></div>
+            <% if (signup) { %>
+            <div class="login-form">
+                <h3>Sign up</h3>
+                <fieldset>
+                  <form action="/dashboard/signup" method="post">
+                    <input type="email" name="mail" required placeholder="Email">
+                    <input type="text" name="name" required placeholder="Name">
+                    <input type="password" name="password" required size="8" placeholder="Password">
+                    <input type="submit" value="Sign up">
+                  </form>
+                </fieldset>
+            </div>
+            <% } else { %>
+            <div class="login-form">
+                <h3>Log in</h3>
+                <fieldset>
+                  <form action="/dashboard/login" method="post">
+                    <input type="email" name="mail" required placeholder="Email">
+                    <input type="password" name="password" required size="8" placeholder="Password">
+                    <input type="submit" value="Sign in">
+                  </form>
+                </fieldset>
+            </div>
+            <% } %>
         </div>
         <div class="footer">
             <div class="company">
@@ -57,5 +68,4 @@
             </div>
         </div>
     </body>
-    <script type="text/javascript" src="/javascripts/dashboard.js"></script>
 </html>

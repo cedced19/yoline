@@ -57,6 +57,7 @@ app.use('/dashboard', dashboard);
 app.use('/api/articles', articles);
 app.use('/api/users', users);
 
+// authentication
 passport.serializeUser(function(model, done) {
         done(null, model.id);
     });
@@ -67,17 +68,20 @@ passport.deserializeUser(function(id, done) {
       });
 });
 
+// define local strategy
 passport.use('local', new LocalStrategy({
       usernameField: 'mail',
       passwordField: 'password'
 },
 function(mail, password, done) {
+        // search in database
         app.models.users.findOne({ mail: mail }, function (err, model) {
           if (err) { return done(err); }
           if (!model) {
             return done(null, false, { message: 'Incorrect email.' });
           }
 
+          // test password
           if(hash.verify(password, model.password)) {
             var returnmodel = {
                 mail: model.mail,

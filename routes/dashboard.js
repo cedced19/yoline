@@ -5,13 +5,39 @@ var auth = require('../policies/auth.js');
 
 /* GET Dashboad */
 router.get('/', auth, function(req, res, next) {
-        res.render('dashboard', {});
+    res.render('dashboard', {});
 });
 
 router.get('/login', function(req, res, next) {
-  res.render('dashboard-login', {});
+    if (req.isAuthenticated()) {
+        res.redirect('/dashboard');
+    } else {
+        req.app.models.users.find().exec(function (err, model) {
+          if(err) return res.status(500).json({ err : err });
+          res.render('dashboard-login', { signup: (model.length == 0), error: req.flash('error')[0] });
+        });
+    }
 });
 
-router.post('/login', passport.authenticate('local', { successRedirect: '/dashboard', failureFlash: false, failureRedirect: '/dashboard/login' }));
+router.post('/login', passport.authenticate('local', { successRedirect: '/dashboard', failureFlash: true, failureRedirect: '/dashboard/login' }));
+
+router.post('/signup', function(req, res, next) {
+    req.app.models.users.find().exec(function (err, model) {
+        if(err) return res.status(500).json({ err : err });
+        if (model.length == 0) {
+            req.app.models.users.create(req.body, function(err, model) {
+                if(err) return res.status(500).json({ err : err });
+                res.redirect('/dashboard/login');
+            });
+        } else {
+            res.redirect('/dashboard/login');
+        }
+      });
+});
+
+router.get('/logout', function(req, res, next) {
+  req.logout();
+  res.redirect('/dashboard/login');
+});
 
 module.exports = router;
