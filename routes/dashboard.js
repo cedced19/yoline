@@ -3,14 +3,15 @@ var router = express.Router();
 var passport = require('passport');
 var auth = require('../policies/auth.js');
 
-/* GET Dashboad */
+/* GET Dashboard */
 router.get('/', auth, function(req, res, next) {
+    res.cookie('yoline-user', JSON.stringify(req.user));
     res.render('dashboard', {});
 });
 
 router.get('/login', function(req, res, next) {
     if (req.isAuthenticated()) {
-        res.redirect('/dashboard');
+        res.redirect('/dashboard/');
     } else {
         req.app.models.users.find().exec(function (err, model) {
           if(err) return res.status(500).json({ err : err });
@@ -19,7 +20,7 @@ router.get('/login', function(req, res, next) {
     }
 });
 
-router.post('/login', passport.authenticate('local', { successRedirect: '/dashboard', failureFlash: true, failureRedirect: '/dashboard/login' }));
+router.post('/login', passport.authenticate('local', { successRedirect: '/dashboard/', failureFlash: true, failureRedirect: '/dashboard/login' }));
 
 router.post('/signup', function(req, res, next) {
     req.app.models.users.find().exec(function (err, model) {

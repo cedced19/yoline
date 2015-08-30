@@ -59,11 +59,12 @@ app.use('/api/users', users);
 
 // authentication
 passport.serializeUser(function(model, done) {
-        done(null, model.id);
-    });
+      done(null, model.id);
+});
 
 passport.deserializeUser(function(id, done) {
       app.models.users.findOne({ id: id } , function (err, model) {
+          delete model.password;
           done(err, model);
       });
 });

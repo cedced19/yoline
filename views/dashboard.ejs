@@ -6,7 +6,7 @@
         <title>Yoline Dashboard</title>
         <link rel="stylesheet" href="/stylesheets/dashboard.css">
     </head>
-    <body>
+    <body ng-app="Dashboard">
         <header>
             <div class="logo">
                 <i class="ion-ios-paper-outline"></i>
@@ -16,16 +16,16 @@
                 <div class="breadcrumb" id="breadcrumb">
                     <div class="br-content">
                         <span class="home">
-                            <a href="#">DASHBOARD</a>
+                            <a href="#/">DASHBOARD</a>
                         </span>
-                        <span class="path-divider">/</span>
-                        <span class="link">
-                            <a href="#">Users</a>
-                        </span>
-                        <span class="path-divider">/</span>
-                        <span class="text">
-                            <p>Add an user</p>
-                        </span>
+                            <span class="path-divider" ng-show="nav">/</span>
+                            <span class="link">
+                                <a href="#/{{nav.category.url}}">{{nav.category.title}}</a>
+                            </span>
+                            <span class="path-divider" ng-show="nav.subcategory">/</span>
+                            <span class="text" ng-show="nav.subcategory">
+                                <p>{{nav.subcategory}}</p>
+                            </span>
                     </div>
                 </div>
                 <div class="search-form">
@@ -44,7 +44,7 @@
                         <i class="ion-chevron-down" id='ico-account'></i>
                 </div>
                 <div class="topmenu hide" id="topbar-menu">
-                    <a href=""><i class="ion-person"></i> My account</a>
+                    <a href="#/account"><i class="ion-person"></i> My account</a>
                     <a href="/dashboard/logout"><i class="ion-power"></i> Sign out</a>
                 </div>
             </div>
@@ -54,12 +54,12 @@
         </div>
         <div class="nav" id="nav">
             <div class="menu">
-                <a href="#">
+                <a href="#/">
                     <i class="ion-home"></i><span> Dashboard</span>
                     </a>
             </div>
             <div class="submenu" id="submenu">
-                <a href="#"><i class="ion-person"><span> Users</span></i> <i class="ion-chevron-right right" id="icon"></i></a>
+                <a href="#"><i class="ion-person"></i><span> Users</span> <i class="ion-chevron-right right" id="icon"></i></a>
                 <div class="sub-content hide" id="sub-content">
                     <a href="#"> Add an user</a>
                     <a href="#"> Statistics</a>
@@ -74,7 +74,7 @@
                 </div>
             </div>
         </div>
-        <div class="content">
+        <div class="content" ng-view>
         </div>
         <div class="footer">
             <div class="company">

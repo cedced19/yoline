@@ -1,5 +1,3 @@
-var $ = require('jquery');
-
 responsive();
 $(window).resize(function(){
     responsive();
@@ -10,6 +8,12 @@ $(document).on('click','#account',function (){;
     $("#topbar-menu").toggleClass("hide");
     $(this).find('#ico-account').toggleClass('ion-chevron-down');
     $(this).find('#ico-account').toggleClass('ion-chevron-up');
+})
+$(document).on('click','#topbar-menu > a',function (){;
+    $("#topbar-menu").toggleClass("show");
+    $("#topbar-menu").toggleClass("hide");
+    $('#account').find('#ico-account').toggleClass('ion-chevron-down');
+    $('#account').find('#ico-account').toggleClass('ion-chevron-up');
 })
 $(document).on('click','.submenu',function (){
     $(this).find("#sub-content").toggleClass("show");
@@ -24,8 +28,6 @@ $(document).on('click','#nav-button-responsive',function (){
 
 function responsive(){
     if($(window).width() < 1024 ){
-        $('#nav').removeClass("hide");
-        $('#nav').removeClass("show")
         $(document).on('click','#search-responsive',function (){
             $("#search-input").addClass('responsive');
             $("#breadcrumb").addClass('hide');
@@ -36,8 +38,5 @@ function responsive(){
             $("#breadcrumb").removeClass('hide');
             $("#search-close").removeClass('responsive');
         })
-    }
-    if($(window).width() < 768){
-        $('#nav').addClass("hide");
     }
 }
