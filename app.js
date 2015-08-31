@@ -9,12 +9,14 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var hash = require('password-hash');
 var flash = require('connect-flash');
+var helmet = require('helmet');
 var session = require('express-session');
 
 var index = require('./routes/index');
 var dashboard = require('./routes/dashboard');
 var articles = require('./routes/articles-api');
 var users = require('./routes/users-api');
+var version = require('./routes/version-api');
 
 var app = express();
 
@@ -39,6 +41,7 @@ app.use('/javascripts/dashboard.js', browserify(__dirname + '/public/javascripts
   minify: true
 }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(helmet());
 app.use(flash());
 app.use(session({
     secret: 'yoline loves rock',
@@ -56,6 +59,7 @@ app.use('/', index);
 app.use('/dashboard', dashboard);
 app.use('/api/articles', articles);
 app.use('/api/users', users);
+app.use('/api/version', version);
 
 // authentication
 passport.serializeUser(function(model, done) {

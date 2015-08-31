@@ -1,8 +1,10 @@
-@import "ionicons";
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic,600,600italic,300,300italic);
-
 $color-first: #C70575
 $color-second: #EFC2EB
+
+@import "./dashboard/bootstrap"
+@import "./dashboard/ionicons"
+@import "./dashboard/snackbar"
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic,600,600italic,300,300italic)
 
 ::selection
   background-color:  $color-first
@@ -40,7 +42,6 @@ table
 a
   color: #FFF
   text-decoration: none
-
 
 header
   height: 70px
@@ -81,7 +82,7 @@ input:focus
   outline: none
 
 input:-webkit-autofill
-    -webkit-box-shadow: 0 0 0px 1000px white inset;
+    -webkit-box-shadow: 0 0 0px 1000px white inset !important;
 
 .logo
   float: left
@@ -264,8 +265,6 @@ input:-webkit-autofill
 #search-close, .nav-button-responsive
   display: none
 
-@import "bootstrap";
-
 .login-error
   width: 300px
   border-radius: 5px
@@ -338,6 +337,7 @@ input:-webkit-autofill
   font-weight: bold
   margin-top: 20px
   padding: 12px 20px
+  cursor: pointer
 
 .login-form input[type="submit"]:hover
   background: $color-second
@@ -356,11 +356,7 @@ input:-webkit-autofill
     text-align: right
 
 .search-input
-  height: 30px
-  -webkit-border-radius: 5px
-  border-radius: 5px
-  border: none !important
-  padding: 0
+  display: inline-block !important
   width: 80% !important
 
 .search-form button
@@ -370,10 +366,17 @@ input:-webkit-autofill
   -webkit-border-radius: 5px
   border-radius: 5px
   font-size: 14px
-  padding: 8px 9px
+  height: 34px
+  padding: 6px 12px
   margin-left: 15px
 
-@import "snackbar";
+.content a
+  color: #4692FC
+  text-decoration: underline
+
+.content a:hover
+  color: #4692FC
+  text-decoration: none
 
 @media only screen and (max-width: 1024px)
   .nav

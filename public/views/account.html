@@ -1,13 +1,15 @@
-<div ng-hide="">
-    <p><strong>Name:</strong> {{user.name}}</p>
+<p><strong>Name:</strong> {{user.name}}</p>
 
-    <p><strong>Email:</strong> {{user.mail}}</p>
+<p><strong>Email:</strong> {{user.mail}}</p>
 
-    <p>
-        <a href="#/account/password"  class="btn btn-info">Change password</a>
-        <a class="btn btn-info">Change other options</a>
-    </p>
-</div>
+<p><strong>Facebook (optional):</strong> {{user.facebook || 'No account registred'}}</p>
+
+<p><strong>Twitter (optional):</strong> {{user.twitter || 'No account registred'}}</p>
+
+<p>
+    <a href="#/account/update"  class="btn btn-info">Change settings</a>
+</p>
+
 
 
 

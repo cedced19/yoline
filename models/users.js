@@ -3,7 +3,10 @@ var hash = require('password-hash');
 
 var format = function(user, cb) {
     user.name = user.name.charAt(0).toUpperCase() + user.name.substring(1).toLowerCase();
-    user.password = hash.generate(user.password);
+    if (user.password) {
+        user.password = hash.generate(user.password);
+    }
+
     cb();
 }
 
