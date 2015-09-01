@@ -17,7 +17,7 @@ var Users = Waterline.Collection.extend({
     autoUpdatedAt: false,
 
     attributes: {
-        email: {
+        mail: {
             type: 'string',
             required: true,
             unique: true

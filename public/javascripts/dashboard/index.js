@@ -7,8 +7,10 @@ var modules = [
       require('angular-route'),
       require('angular-sanitize'),
       require('angular-cookies')
-    ];
-
+];
+var errorHandler = function () {
+    $.snackbar({content: 'An error has occured!'});
+};
 angular.module('Dashboard', ['ngRoute', 'ngSanitize', 'ngCookies'])
 .config(['$routeProvider', function($routeProvider){
         $routeProvider
@@ -23,6 +25,14 @@ angular.module('Dashboard', ['ngRoute', 'ngSanitize', 'ngCookies'])
         .when('/account/update', {
             templateUrl: '/views/account-update.html',
             controller: 'AccountUpdateCtrl'
+        })
+        .when('/users', {
+            templateUrl: '/views/users.html',
+            controller: 'UsersCtrl'
+        })
+        .when('/users/new', {
+            templateUrl: '/views/users-new.html',
+            controller: 'UsersNewCtrl'
         })
         .otherwise({
             redirectTo: '/'
@@ -67,11 +77,11 @@ angular.module('Dashboard', ['ngRoute', 'ngSanitize', 'ngCookies'])
         };
         $scope.user = $cookieStore.get('yoline-user');
         $scope.changePassword = function () {
-            if ($scope.password.new == $scope.password.confirm) {
+            if ($scope.password.new == $scope.password.confirm && password.new != '') {
                 $scope.user.password = $scope.password.new;
                 $http.put('/api/users/' + $scope.user.id, $scope.user).success(function() {
                     $.snackbar({content: 'Password has just been updated!'});
-                });
+                }).error(errorHandler);
             } else {
                 $.snackbar({content: 'The passwords don\'t mach each other.'});
             }
@@ -85,6 +95,45 @@ angular.module('Dashboard', ['ngRoute', 'ngSanitize', 'ngCookies'])
             }
             $http.put('/api/users/' + $scope.user.id, $scope.user).success(function() {
                 $.snackbar({content: 'Your profile has just been updated!'});
-            });
+            }).error(errorHandler);
+        };
+}])
+.controller('UsersCtrl', ['$scope', '$location', '$http', '$rootScope', function($scope, $location, $http, $rootScope) {
+        $rootScope.nav = {
+            category: {
+                title: 'Users',
+                url: 'users'
+            },
+            subcategory: false
+        };
+        $http.get('/api/users').success(function (data) {
+            $scope.users = data;
+
+            $scope.delete = function (user) {
+                 $http.delete('/api/users/' + user.id).success(function () {
+                    $scope.users.splice($scope.users.indexOf(user), 1);
+                    $.snackbar({content: 'User has just been deleted!'});
+                 }).error(errorHandler);
+            };
+        });
+}])
+.controller('UsersNewCtrl', ['$scope', '$location', '$http', '$rootScope', function($scope, $location, $http, $rootScope) {
+        $rootScope.nav = {
+            category: {
+                title: 'Users',
+                url: 'users'
+            },
+            subcategory: 'Add an new users'
+        };
+        $scope.create = function () {
+            if ($scope.password.password == $scope.password.confirm && password.password != '') {
+                $scope.user.password = $scope.password.password;
+                $http.post('/api/users/', $scope.user).success(function() {
+                    $location.path('/users');
+                    $.snackbar({content: 'User has just been updated!'});
+                }).error(errorHandler);
+            } else {
+                $.snackbar({content: 'The passwords don\'t mach each other.'});
+            }
         };
 }]);

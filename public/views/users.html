@@ -1,0 +1,19 @@
+<input ng-model="search" type="text" class="form-control" placeholder="Search">
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="user in users | filter:search | orderBy:name">
+            <td>{{user.id}}</td>
+            <td>{{user.name}}</td>
+            <td>{{user.mail }}</td>
+            <td><i class="ion-trash-b click" ng-click="delete(user)"></i></td>
+        </tr>
+    </tbody>
+</table>

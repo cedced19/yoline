@@ -6,11 +6,13 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var browserify = require('browserify-middleware');
 var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
 var hash = require('password-hash');
 var flash = require('connect-flash');
 var helmet = require('helmet');
 var session = require('express-session');
+
+var FileStore = require('session-file-store')(session);
+var LocalStrategy = require('passport-local').Strategy;
 
 var index = require('./routes/index');
 var dashboard = require('./routes/dashboard');
@@ -29,6 +31,24 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+// development css and js management
+// will not minify
+if (app.get('env') === 'development') {
+  app.use(require('node-sass-middleware')({
+    src: path.join(__dirname, 'public'),
+    dest: path.join(__dirname, 'public'),
+    indentedSyntax: true,
+    sourceMap: true
+  }));
+  app.use('/javascripts/dashboard.js', browserify(__dirname + '/public/javascripts/dashboard/index.js', {
+    debug: true,
+    minify: false
+  }));
+}
+
+// production css and js management
+// will minify
 app.use(require('node-sass-middleware')({
   src: path.join(__dirname, 'public'),
   dest: path.join(__dirname, 'public'),
@@ -37,9 +57,10 @@ app.use(require('node-sass-middleware')({
   sourceMap: false
 }));
 app.use('/javascripts/dashboard.js', browserify(__dirname + '/public/javascripts/dashboard/index.js', {
-  debug: true,
+  debug: false,
   minify: true
 }));
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(helmet());
 app.use(flash());
@@ -48,9 +69,9 @@ app.use(session({
     name: 'yoline-session',
     proxy: false,
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
+    store:  new FileStore({ path: './tmp/sessions', logFn: function () {} })
 }));
-
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -133,6 +154,5 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
 
 module.exports = app;
