@@ -13,7 +13,11 @@
             <td>{{user.id}}</td>
             <td>{{user.name}}</td>
             <td>{{user.mail }}</td>
-            <td><i class="ion-trash-b click" ng-click="delete(user)"></i></td>
+            <td>
+                <i class="ion-trash-b click" ng-click="confirm = true" ng-hide="confirm"></i>
+                <i class="ion-checkmark click" ng-click="delete(user)" ng-show="confirm"></i>
+                <i class="ion-close click" ng-click="confirm = false" ng-show="confirm"></i>
+            </td>
         </tr>
     </tbody>
 </table>

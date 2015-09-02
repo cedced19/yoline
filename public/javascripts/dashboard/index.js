@@ -112,6 +112,7 @@ angular.module('Dashboard', ['ngRoute', 'ngSanitize', 'ngCookies'])
             $scope.delete = function (user) {
                  $http.delete('/api/users/' + user.id).success(function () {
                     $scope.users.splice($scope.users.indexOf(user), 1);
+                    $scope.confirm = false;
                     $.snackbar({content: 'User has just been deleted!'});
                  }).error(errorHandler);
             };
