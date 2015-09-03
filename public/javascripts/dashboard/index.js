@@ -34,6 +34,14 @@ angular.module('Dashboard', ['ngRoute', 'ngSanitize', 'ngCookies'])
             templateUrl: '/views/users-new.html',
             controller: 'UsersNewCtrl'
         })
+        .when('/articles', {
+            templateUrl: '/views/articles.html',
+            controller: 'ArticlesCtrl'
+        })
+        .when('/articles/new', {
+            templateUrl: '/views/articles-new.html',
+            controller: 'ArticlesNewCtrl'
+        })
         .otherwise({
             redirectTo: '/'
         });
@@ -124,7 +132,7 @@ angular.module('Dashboard', ['ngRoute', 'ngSanitize', 'ngCookies'])
                 title: 'Users',
                 url: 'users'
             },
-            subcategory: 'Add an new users'
+            subcategory: 'Add an new user'
         };
         $scope.create = function () {
             if ($scope.password.password == $scope.password.confirm && password.password != '') {
@@ -136,5 +144,22 @@ angular.module('Dashboard', ['ngRoute', 'ngSanitize', 'ngCookies'])
             } else {
                 $.snackbar({content: 'The passwords don\'t mach each other.'});
             }
+        };
+}]).controller('ArticlesCtrl', ['$scope', '$location', '$http', '$rootScope', function($scope, $location, $http, $rootScope) {
+        $rootScope.nav = {
+            category: {
+                title: 'Articles',
+                url: 'articles'
+            },
+            subcategory: false
+        };
+}])
+.controller('ArticlesNewCtrl', ['$scope', '$location', '$http', '$rootScope', function($scope, $location, $http, $rootScope) {
+        $rootScope.nav = {
+            category: {
+                title: 'Articles',
+                url: 'articles'
+            },
+            subcategory: 'Add an new article'
         };
 }]);
