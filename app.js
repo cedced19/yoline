@@ -8,6 +8,7 @@ var browserify = require('browserify-middleware');
 var passport = require('passport');
 var hash = require('password-hash');
 var flash = require('connect-flash');
+var compress = require('compression');
 var helmet = require('helmet');
 var session = require('express-session');
 
@@ -31,6 +32,8 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+app.use(compress());
 
 // development css and js management
 // will not minify
@@ -62,6 +65,7 @@ app.use('/javascripts/dashboard.js', browserify(__dirname + '/public/javascripts
 }));
 
 app.use(express.static(path.join(__dirname, 'public')));
+
 app.use(helmet());
 app.use(flash());
 app.use(session({
