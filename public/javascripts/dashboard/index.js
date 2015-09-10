@@ -2,12 +2,10 @@ window.$ = require('jquery');
 require('./init-ui.js');
 require('./snackbar.js');
 require('angular');
+require('angular-route');
+require('angular-sanitize');
+require('angular-cookies');
 
-var modules = [
-      require('angular-route'),
-      require('angular-sanitize'),
-      require('angular-cookies')
-];
 var errorHandler = function () {
     $.snackbar({content: 'An error has occured!'});
 };
@@ -106,7 +104,7 @@ angular.module('Dashboard', ['ngRoute', 'ngSanitize', 'ngCookies'])
             }).error(errorHandler);
         };
 }])
-.controller('UsersCtrl', ['$scope', '$location', '$http', '$rootScope', function($scope, $location, $http, $rootScope) {
+.controller('UsersCtrl', ['$scope', '$location', '$http', '$rootScope', '$cookieStore', function($scope, $location, $http, $rootScope,  $cookieStore) {
         $rootScope.nav = {
             category: {
                 title: 'Users',
@@ -114,15 +112,22 @@ angular.module('Dashboard', ['ngRoute', 'ngSanitize', 'ngCookies'])
             },
             subcategory: false
         };
+        $scope.user = $cookieStore.get('yoline-user');
+
         $http.get('/api/users').success(function (data) {
             $scope.users = data;
 
             $scope.delete = function (user) {
-                 $http.delete('/api/users/' + user.id).success(function () {
-                    $scope.users.splice($scope.users.indexOf(user), 1);
+                 if (user.id == $scope.user.id) {
+                    $.snackbar({content: 'You can\'t delete yourself!'});
                     $scope.confirm = false;
-                    $.snackbar({content: 'User has just been deleted!'});
-                 }).error(errorHandler);
+                } else {
+                     $http.delete('/api/users/' + user.id).success(function () {
+                        $scope.users.splice($scope.users.indexOf(user), 1);
+                        $scope.confirm = false;
+                        $.snackbar({content: 'User has just been deleted!'});
+                     }).error(errorHandler);
+                 }
             };
         });
 }])
