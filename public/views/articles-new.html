@@ -1,0 +1,13 @@
+<form name="formCreation">
+    <div class="form-group">
+        <label for="name">Title:</label>
+        <input type="text" id="title" class="form-control" placeholder="Title" ng-model="newArticle.name">
+    </div>
+    <div class="form-group">
+        <div text-angular ng-model="newArticle.content"></div>
+    </div>
+    </div>
+    <div class="text-center">
+        <button class="btn btn-info" ng-disabled="formCreation.$pristine" ng-click="publish()">Adding a new article</button>
+    </div>
+</form>

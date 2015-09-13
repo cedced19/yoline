@@ -6,20 +6,20 @@ $(window).resize(function(){
 $(document).on('click','#account',function (){;
     $("#topbar-menu").toggleClass("show");
     $("#topbar-menu").toggleClass("hide");
-    $(this).find('#ico-account').toggleClass('ion-chevron-down');
-    $(this).find('#ico-account').toggleClass('ion-chevron-up');
+    $(this).find('#ico-account').toggleClass('fa-chevron-down');
+    $(this).find('#ico-account').toggleClass('fa-chevron-up');
 })
 $(document).on('click','#topbar-menu > a',function (){;
     $("#topbar-menu").toggleClass("show");
     $("#topbar-menu").toggleClass("hide");
-    $('#account').find('#ico-account').toggleClass('ion-chevron-down');
-    $('#account').find('#ico-account').toggleClass('ion-chevron-up');
+    $('#account').find('#ico-account').toggleClass('fa-chevron-down');
+    $('#account').find('#ico-account').toggleClass('fa-chevron-up');
 })
 $(document).on('click','.submenu',function (){
     $(this).find("#sub-content").toggleClass("show");
     $(this).find("#sub-content").toggleClass("hide");
-    $(this).find('#icon').toggleClass('ion-chevron-right');
-    $(this).find('#icon').toggleClass('ion-chevron-up');
+    $(this).find('#icon').toggleClass('fa-chevron-right');
+    $(this).find('#icon').toggleClass('fa-chevron-up');
 })
 $(document).on('click','#nav-button-responsive',function (){
     $('#nav').toggleClass('hide');

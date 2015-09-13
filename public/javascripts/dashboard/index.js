@@ -5,11 +5,15 @@ require('angular');
 require('angular-route');
 require('angular-sanitize');
 require('angular-cookies');
+require('./edit/text-angular-rangy.min.js');
+require('./edit/text-angular-sanitize.min.js');
+require('./edit/text-angular.min.js');
+
 
 var errorHandler = function () {
     $.snackbar({content: 'An error has occured!'});
 };
-angular.module('Dashboard', ['ngRoute', 'ngSanitize', 'ngCookies'])
+angular.module('Dashboard', ['ngRoute', 'ngSanitize', 'ngCookies', 'textAngular'])
 .config(['$routeProvider', function($routeProvider){
         $routeProvider
         .when('/', {
@@ -44,6 +48,14 @@ angular.module('Dashboard', ['ngRoute', 'ngSanitize', 'ngCookies'])
             redirectTo: '/'
         });
 }])
+.directive('toolbarTip', function() {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            $(element).toolbar(scope.$eval(attrs.toolbarTip));
+        }
+    };
+})
 .controller('IndexCtrl', ['$scope', '$location', '$http', '$rootScope', function($scope, $location, $http, $rootScope) {
         $rootScope.nav = {
             category: {

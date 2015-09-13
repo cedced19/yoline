@@ -2,8 +2,9 @@ $color-first: #C70575
 $color-second: #EFC2EB
 
 @import "./dashboard/bootstrap"
-@import "./dashboard/ionicons"
 @import "./dashboard/snackbar"
+@import "./dashboard/text-angular"
+@import "./dashboard/font-awesome"
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic,600,600italic,300,300italic)
 
 ::selection
@@ -104,8 +105,9 @@ input:-webkit-autofill
 .logo
   i
     display: inline-block
-    font-size: 30px
+    font-size: 25px
     vertical-align: top
+    padding-top: 20px
   p
     display: inline-block
     font-size: 24px
@@ -169,12 +171,10 @@ input:-webkit-autofill
     color: #758697
     padding: 0 10px
   i
-    color: #758697
+    color: inherit
     margin-right: 5px
   a:hover
     color: #4c637b
-    background: #e3eaf3
-
 
 .nav
   position: absolute
@@ -201,6 +201,7 @@ input:-webkit-autofill
 .submenu .right
   float: right
   padding-right: 15px
+  padding-top: 10px
 
 .sub-content
   background: #1a1c20
@@ -381,6 +382,9 @@ input:-webkit-autofill
   color: #4692FC
   text-decoration: none
 
+.ta-root .btn-default
+    color: inherit !important
+
 @media only screen and (max-width: 1024px)
   .nav
     width: 60px
@@ -389,7 +393,7 @@ input:-webkit-autofill
     .submenu a, .menu a
       padding-left: 0
       text-align: center
-    .ion-chevron-right
+    .ion-chevron-right, .ion-chevron-up
       font-size: 10px !important
   .logo
     width: 60px
@@ -472,6 +476,9 @@ input:-webkit-autofill
     text-align: center
     background: #272930
     z-index: 5
+    a
+      color: #fff
+
   .footer
     display: none
 
