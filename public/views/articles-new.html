@@ -1,11 +1,17 @@
 <form name="formCreation">
     <div class="form-group">
-        <label for="name">Title:</label>
+        <label for="title">Title:</label>
         <input type="text" id="title" class="form-control" placeholder="Title" ng-model="newArticle.name">
     </div>
     <div class="form-group">
-        <div text-angular ng-model="newArticle.content"></div>
+        <label for="content">Content:</label>
+        <div id="content" text-angular ng-model="newArticle.content"></div>
     </div>
+    <div class="form-group">
+        <label for="keywords">Keywords:</label>
+        <tags-input id="keywords" ng-model="newArticle.tags">
+            <auto-complete source="loadTags($query)"></auto-complete>
+        </tags-input>
     </div>
     <div class="text-center">
         <button class="btn btn-info" ng-disabled="formCreation.$pristine" ng-click="publish()">Adding a new article</button>

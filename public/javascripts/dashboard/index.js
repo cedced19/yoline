@@ -8,12 +8,12 @@ require('angular-cookies');
 require('./edit/text-angular-rangy.min.js');
 require('./edit/text-angular-sanitize.min.js');
 require('./edit/text-angular.min.js');
-
+require('ng-tags-input');
 
 var errorHandler = function () {
     $.snackbar({content: 'An error has occured!'});
 };
-angular.module('Dashboard', ['ngRoute', 'ngSanitize', 'ngCookies', 'textAngular'])
+angular.module('Dashboard', ['ngRoute', 'ngSanitize', 'ngCookies', 'textAngular', 'ngTagsInput'])
 .config(['$routeProvider', function($routeProvider){
         $routeProvider
         .when('/', {
