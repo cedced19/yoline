@@ -179,4 +179,23 @@ angular.module('Dashboard', ['ngRoute', 'ngSanitize', 'ngCookies', 'textAngular'
             },
             subcategory: 'Add an new article'
         };
+        $scope.publish = function () {
+            if ($scope.newArticle.tags.length < 3) {
+                $.snackbar({content: 'You must set at least three keywords!'});
+            } else if ($scope.newArticle.title == '') {
+                $.snackbar({content: 'You must set a title!'});
+            } else {
+                var article = {
+                    title: $scope.newArticle.title,
+                    content: $scope.newArticle.content,
+                    keywords: []
+                };
+                angular.forEach($scope.newArticle.tags, function(value, key) {
+                    article.keywords.push(value.text);
+                });
+                $http.post('/api/articles', article).success(function () {
+                    $.snackbar({content: 'Articles has just been created!'});
+                }).error(errorHandler);
+            }
+        };
 }]);

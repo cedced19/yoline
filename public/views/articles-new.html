@@ -1,7 +1,7 @@
-<form name="formCreation">
+<form name="formCreation" ng-submit="publish()">
     <div class="form-group">
         <label for="title">Title:</label>
-        <input type="text" id="title" class="form-control" placeholder="Title" ng-model="newArticle.name">
+        <input type="text" id="title" class="form-control" placeholder="Title" ng-model="newArticle.title">
     </div>
     <div class="form-group">
         <label for="content">Content:</label>
@@ -9,11 +9,9 @@
     </div>
     <div class="form-group">
         <label for="keywords">Keywords:</label>
-        <tags-input id="keywords" ng-model="newArticle.tags">
-            <auto-complete source="loadTags($query)"></auto-complete>
-        </tags-input>
+        <tags-input id="keywords" ng-model="newArticle.tags"></tags-input>
     </div>
     <div class="text-center">
-        <button class="btn btn-info" ng-disabled="formCreation.$pristine" ng-click="publish()">Adding a new article</button>
+        <button class="btn btn-info" type="submit" ng-disabled="formCreation.$pristine">Adding a new article</button>
     </div>
 </form>
