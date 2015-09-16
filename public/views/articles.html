@@ -1,0 +1,24 @@
+<input ng-model="search" type="text" class="form-control" placeholder="Search">
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Keywords</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="article in articles | filter:search | orderBy:name">
+            <td>{{article.id}}</td>
+            <td>{{article.title}}</td>
+            <td>{{article.keywords}}</td>
+            <td>
+                <i class="fa fa-trash click" ng-click="confirm = true" ng-hide="confirm"></i>
+                <i class="fa fa-pencil click" ng-click="update(article)" ng-hide="confirm"></i>
+                <i class="fa fa-check click" ng-click="delete(article)" ng-show="confirm"></i>
+                <i class="fa fa-close click" ng-click="confirm = false" ng-show="confirm"></i>
+            </td>
+        </tr>
+    </tbody>
+</table>

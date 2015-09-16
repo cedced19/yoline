@@ -44,6 +44,10 @@ angular.module('Dashboard', ['ngRoute', 'ngSanitize', 'ngCookies', 'textAngular'
             templateUrl: '/views/articles-new.html',
             controller: 'ArticlesNewCtrl'
         })
+        .when('/articles/:id', {
+            templateUrl: '/views/articles-update.html',
+            controller: 'ArticlesUpdateCtrl'
+        })
         .otherwise({
             redirectTo: '/'
         });
@@ -162,7 +166,8 @@ angular.module('Dashboard', ['ngRoute', 'ngSanitize', 'ngCookies', 'textAngular'
                 $.snackbar({content: 'The passwords don\'t mach each other.'});
             }
         };
-}]).controller('ArticlesCtrl', ['$scope', '$location', '$http', '$rootScope', function($scope, $location, $http, $rootScope) {
+}])
+.controller('ArticlesCtrl', ['$scope', '$location', '$http', '$rootScope', function($scope, $location, $http, $rootScope) {
         $rootScope.nav = {
             category: {
                 title: 'Articles',
@@ -170,6 +175,31 @@ angular.module('Dashboard', ['ngRoute', 'ngSanitize', 'ngCookies', 'textAngular'
             },
             subcategory: false
         };
+
+        $http.get('/api/articles').success(function (data) {
+            $scope.articles = data;
+
+            angular.forEach($scope.articles, function(value, key) {
+                var keywords = '';
+                angular.forEach(value.keywords, function(value, key) {
+                        keywords += ' ';
+                        keywords += value;
+                 });
+                $scope.articles[key].keywords = keywords;
+            });
+
+            $scope.delete = function (article) {
+                     $http.delete('/api/articles/' + article.id).success(function () {
+                        $scope.users.splice($scope.articles.indexOf(article), 1);
+                        $scope.confirm = false;
+                        $.snackbar({content: 'Article has just been deleted!'});
+                     }).error(errorHandler);
+            };
+
+            $scope.update = function (article) {
+                    $location.path('/articles/' + article.id);
+            };
+        });
 }])
 .controller('ArticlesNewCtrl', ['$scope', '$location', '$http', '$rootScope', function($scope, $location, $http, $rootScope) {
         $rootScope.nav = {
@@ -195,7 +225,17 @@ angular.module('Dashboard', ['ngRoute', 'ngSanitize', 'ngCookies', 'textAngular'
                 });
                 $http.post('/api/articles', article).success(function () {
                     $.snackbar({content: 'Articles has just been created!'});
+                    $location.path('/')
                 }).error(errorHandler);
             }
+        };
+}])
+.controller('ArticlesUpdateCtrl', ['$scope', '$location', '$http', '$rootScope', function($scope, $location, $http, $rootScope) {
+        $rootScope.nav = {
+            category: {
+                title: 'Articles',
+                url: 'articles'
+            },
+            subcategory: 'Update an article'
         };
 }]);
