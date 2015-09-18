@@ -230,7 +230,7 @@ angular.module('Dashboard', ['ngRoute', 'ngSanitize', 'ngCookies', 'textAngular'
             }
         };
 }])
-.controller('ArticlesUpdateCtrl', ['$scope', '$location', '$http', '$rootScope', function($scope, $location, $http, $rootScope) {
+.controller('ArticlesUpdateCtrl', ['$scope', '$location', '$http', '$rootScope', '$routeParams', function($scope, $location, $http, $rootScope, $routeParams) {
         $rootScope.nav = {
             category: {
                 title: 'Articles',
@@ -238,4 +238,27 @@ angular.module('Dashboard', ['ngRoute', 'ngSanitize', 'ngCookies', 'textAngular'
             },
             subcategory: 'Update an article'
         };
+        $http.get('/api/articles/' + $routeParams.id).success(function (data) {
+            $scope.currentArticle = data;
+            $scope.tags = [];
+            angular.forEach(data.keywords, function(value, key) {
+                    $scope.tags.push({text: value});
+            });
+            $scope.update = function () {
+                if ($scope.tags.length < 3) {
+                    $.snackbar({content: 'You must set at least three keywords!'});
+                } else if ($scope.currentArticle.title == '') {
+                    $.snackbar({content: 'You must set a title!'});
+                } else {
+                    $scope.currentArticle.keywords = []
+                    angular.forEach($scope.tags, function(value, key) {
+                        $scope.currentArticle.keywords.push(value.text);
+                    });
+                    $http.put('/api/articles/' + $routeParams.id, $scope.currentArticle).success(function () {
+                        $.snackbar({content: 'Articles has just been updated!'});
+                        $location.path('/')
+                    }).error(errorHandler);
+                }
+        };
+        });
 }]);

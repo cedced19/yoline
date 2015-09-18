@@ -1,0 +1,17 @@
+<form name="formCreation" ng-submit="update()">
+    <div class="form-group">
+        <label for="title">Title:</label>
+        <input type="text" id="title" class="form-control" placeholder="Title" ng-model="currentArticle.title">
+    </div>
+    <div class="form-group">
+        <label for="content">Content:</label>
+        <div id="content" text-angular ng-model="currentArticle.content"></div>
+    </div>
+    <div class="form-group">
+        <label for="keywords">Keywords:</label>
+        <tags-input id="keywords" ng-model="tags"></tags-input>
+    </div>
+    <div class="text-center">
+        <button class="btn btn-info" type="submit" ng-disabled="formCreation.$pristine">Update the article</button>
+    </div>
+</form>
