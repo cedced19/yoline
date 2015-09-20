@@ -223,9 +223,9 @@ angular.module('Dashboard', ['ngRoute', 'ngSanitize', 'ngCookies', 'textAngular'
                 angular.forEach($scope.newArticle.tags, function(value, key) {
                     article.keywords.push(value.text);
                 });
-                $http.post('/api/articles', article).success(function () {
+                $http.post('/api/articles', article).success(function (data) {
                     $.snackbar({content: 'Articles has just been created!'});
-                    $location.path('/')
+                    $location.path('/articles/' + data.id);
                 }).error(errorHandler);
             }
         };
@@ -256,7 +256,6 @@ angular.module('Dashboard', ['ngRoute', 'ngSanitize', 'ngCookies', 'textAngular'
                     });
                     $http.put('/api/articles/' + $routeParams.id, $scope.currentArticle).success(function () {
                         $.snackbar({content: 'Articles has just been updated!'});
-                        $location.path('/')
                     }).error(errorHandler);
                 }
         };

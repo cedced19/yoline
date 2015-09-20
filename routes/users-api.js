@@ -40,7 +40,7 @@ router.put('/:id', auth, function(req, res) {
     delete req.body.id;
     req.app.models.users.update({ id: req.params.id }, req.body, function(err, model) {
         if(err) return res.json({ err: err }, 500);
-        res.json(model);
+        res.json(model[0]);
     });
 });
 
