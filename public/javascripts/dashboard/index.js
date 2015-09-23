@@ -190,7 +190,7 @@ angular.module('Dashboard', ['ngRoute', 'ngSanitize', 'ngCookies', 'textAngular'
 
             $scope.delete = function (article) {
                      $http.delete('/api/articles/' + article.id).success(function () {
-                        $scope.users.splice($scope.articles.indexOf(article), 1);
+                        $scope.articles.splice($scope.articles.indexOf(article), 1);
                         $scope.confirm = false;
                         $.snackbar({content: 'Article has just been deleted!'});
                      }).error(errorHandler);

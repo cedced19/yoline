@@ -5,9 +5,30 @@ var Articles = Waterline.Collection.extend({
     connection: 'save',
 
     attributes: {
-        content: 'string',
-        title: 'string',
-        keywords: 'array'
+        content: {
+            type: 'string',
+            required: true
+        },
+        uri: {
+            type: 'string',
+            required: true,
+            unique: true
+        },
+        title: {
+            type: 'string',
+            required: true
+        },
+        keywords: {
+            type: 'array',
+            required: true
+        }
+    },
+
+    beforeValidate: function (article, cb) {
+        if (!article.uri) {
+            article.uri = article.id + '-' + article.title.toString().toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-]+/g, '').replace(/\-\-+/g, '-').replace(/^-+/, '').replace(/-+$/, '');
+        }
+        cb();
     }
 });
 
