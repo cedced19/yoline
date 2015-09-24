@@ -250,7 +250,7 @@ angular.module('Dashboard', ['ngRoute', 'ngSanitize', 'ngCookies', 'textAngular'
                 } else if ($scope.currentArticle.title == '') {
                     $.snackbar({content: 'You must set a title!'});
                 } else {
-                    $scope.currentArticle.keywords = []
+                    $scope.currentArticle.keywords = [];
                     angular.forEach($scope.tags, function(value, key) {
                         $scope.currentArticle.keywords.push(value.text);
                     });
