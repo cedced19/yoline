@@ -8,7 +8,7 @@ var format = function(user, cb) {
     }
 
     cb();
-}
+};
 
 var Users = Waterline.Collection.extend({
     identity: 'users',

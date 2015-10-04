@@ -81,10 +81,10 @@ angular.module('Dashboard', ['ngRoute', 'ngSanitize', 'ngCookies', 'textAngular'
             subcategory: false
         };
         $scope.user = $cookieStore.get('yoline-user');
-       if($scope.user.facebook.length == 0) {
+       if($scope.user.facebook.length === 0) {
             $scope.user.facebook = 'No account registred';
         }
-        if ($scope.user.twitter.length == 0) {
+        if ($scope.user.twitter.length === 0) {
             $scope.user.twitter = 'No account registred';
         }
         $scope.user = $cookieStore.get('yoline-user');
@@ -99,7 +99,7 @@ angular.module('Dashboard', ['ngRoute', 'ngSanitize', 'ngCookies', 'textAngular'
         };
         $scope.user = $cookieStore.get('yoline-user');
         $scope.changePassword = function () {
-            if ($scope.password.new == $scope.password.confirm && password.new != '') {
+            if ($scope.password.new == $scope.password.confirm && password.new !== '') {
                 $scope.user.password = $scope.password.new;
                 $http.put('/api/users/' + $scope.user.id, $scope.user).success(function() {
                     $.snackbar({content: 'Password has just been updated!'});
@@ -109,10 +109,10 @@ angular.module('Dashboard', ['ngRoute', 'ngSanitize', 'ngCookies', 'textAngular'
             }
         };
         $scope.changeSettings = function () {
-            if ($scope.user.facebook == '') {
+            if ($scope.user.facebook === '') {
                 delete $scope.user.facebook;
             }
-            if ($scope.user.twitter == '') {
+            if ($scope.user.twitter === '') {
                 delete $scope.user.twitter;
             }
             $http.put('/api/users/' + $scope.user.id, $scope.user).success(function() {
@@ -156,7 +156,7 @@ angular.module('Dashboard', ['ngRoute', 'ngSanitize', 'ngCookies', 'textAngular'
             subcategory: 'Add an new user'
         };
         $scope.create = function () {
-            if ($scope.password.password == $scope.password.confirm && password.password != '') {
+            if ($scope.password.password == $scope.password.confirm && password.password !== '') {
                 $scope.user.password = $scope.password.password;
                 $http.post('/api/users/', $scope.user).success(function() {
                     $location.path('/users');
@@ -212,7 +212,7 @@ angular.module('Dashboard', ['ngRoute', 'ngSanitize', 'ngCookies', 'textAngular'
         $scope.publish = function () {
             if ($scope.newArticle.tags.length < 3) {
                 $.snackbar({content: 'You must set at least three keywords!'});
-            } else if ($scope.newArticle.title == '') {
+            } else if ($scope.newArticle.title === '') {
                 $.snackbar({content: 'You must set a title!'});
             } else {
                 var article = {
@@ -247,7 +247,7 @@ angular.module('Dashboard', ['ngRoute', 'ngSanitize', 'ngCookies', 'textAngular'
             $scope.update = function () {
                 if ($scope.tags.length < 3) {
                     $.snackbar({content: 'You must set at least three keywords!'});
-                } else if ($scope.currentArticle.title == '') {
+                } else if ($scope.currentArticle.title === '') {
                     $.snackbar({content: 'You must set a title!'});
                 } else {
                     $scope.currentArticle.keywords = [];
