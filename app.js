@@ -20,6 +20,7 @@ var dashboard = require('./routes/dashboard');
 var articles = require('./routes/articles-api');
 var users = require('./routes/users-api');
 var version = require('./routes/version-api');
+var go = require('./routes/go');
 
 var app = express();
 
@@ -85,6 +86,7 @@ app.use('/dashboard', dashboard);
 app.use('/api/articles', articles);
 app.use('/api/users', users);
 app.use('/api/version', version);
+app.use('/go', go);
 
 // authentication
 passport.serializeUser(function(model, done) {
