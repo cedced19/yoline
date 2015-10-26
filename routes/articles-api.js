@@ -10,6 +10,7 @@ router.get('/', function(req, res) {
     });
 });
 
+/* POST Articles: create an article */
 router.post('/', auth, function(req, res) {
     req.app.models.articles.create(req.body, function(err, model) {
         if(err) return next(err);
@@ -17,6 +18,7 @@ router.post('/', auth, function(req, res) {
     });
 });
 
+/* GET Article */
 router.get('/:id', function(req, res) {
     req.app.models.articles.findOne({ id: req.params.id }, function(err, model) {
         if(err) return next(err);
@@ -25,6 +27,7 @@ router.get('/:id', function(req, res) {
     });
 });
 
+/* DELETE Article */
 router.delete('/:id', auth, function(req, res) {
     req.app.models.articles.destroy({ id: req.params.id }, function(err) {
         if(err) return next(err);
@@ -32,6 +35,7 @@ router.delete('/:id', auth, function(req, res) {
     });
 });
 
+/* PUT Article */
 router.put('/:id', auth, function(req, res) {
     delete req.body.id;
     req.app.models.articles.update({ id: req.params.id }, req.body, function(err, model) {

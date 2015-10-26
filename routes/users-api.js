@@ -13,6 +13,7 @@ router.get('/', function(req, res) {
     });
 });
 
+/* POST Users: create an user */
 router.post('/', auth, function(req, res) {
     req.app.models.users.create(req.body, function(err, model) {
         if(err) return next(err);
@@ -20,6 +21,7 @@ router.post('/', auth, function(req, res) {
     });
 });
 
+/* GET User */
 router.get('/:id', function(req, res) {
     req.app.models.users.findOne({ id: req.params.id }, function(err, model) {
         if(err) return next(err);
@@ -29,6 +31,7 @@ router.get('/:id', function(req, res) {
     });
 });
 
+/* DELETE User */
 router.delete('/:id', auth, function(req, res) {
     req.app.models.users.destroy({ id: req.params.id }, function(err) {
         if(err) return next(err);
@@ -36,6 +39,7 @@ router.delete('/:id', auth, function(req, res) {
     });
 });
 
+/* PUT User */
 router.put('/:id', auth, function(req, res) {
     delete req.body.id;
     req.app.models.users.update({ id: req.params.id }, req.body, function(err, model) {

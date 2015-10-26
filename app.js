@@ -12,6 +12,8 @@ var compress = require('compression');
 var helmet = require('helmet');
 var session = require('express-session');
 
+var config = require('./config.json');
+
 var FileStore = require('session-file-store')(session);
 var LocalStrategy = require('passport-local').Strategy;
 
@@ -20,6 +22,7 @@ var dashboard = require('./routes/dashboard');
 var articles = require('./routes/articles-api');
 var users = require('./routes/users-api');
 var version = require('./routes/version-api');
+var informations = require('./routes/informations-api');
 var go = require('./routes/go');
 
 var app = express();
@@ -86,7 +89,13 @@ app.use('/dashboard', dashboard);
 app.use('/api/articles', articles);
 app.use('/api/users', users);
 app.use('/api/version', version);
+app.use('/api/informations', informations);
 app.use('/go', go);
+
+// load informations
+app.locals.title = config.title;
+app.locals.description = config.description;
+app.locals.keywords = config.keywords;
 
 // authentication
 passport.serializeUser(function(model, done) {

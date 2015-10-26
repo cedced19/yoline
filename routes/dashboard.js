@@ -9,6 +9,7 @@ router.get('/', auth, function(req, res, next) {
     res.render('dashboard', {});
 });
 
+/* GET Login */
 router.get('/login', function(req, res, next) {
     if (req.isAuthenticated()) {
         res.redirect('/dashboard/');
@@ -20,8 +21,10 @@ router.get('/login', function(req, res, next) {
     }
 });
 
+/* POST Login */
 router.post('/login', passport.authenticate('local', { successRedirect: '/dashboard/', failureFlash: true, failureRedirect: '/dashboard/login' }));
 
+/* POST Signup */
 router.post('/signup', function(req, res, next) {
     req.app.models.users.find().exec(function (err, model) {
         if(err) return res.status(500).json({ err : err });
@@ -36,6 +39,7 @@ router.post('/signup', function(req, res, next) {
       });
 });
 
+/* GET Logout */
 router.get('/logout', function(req, res, next) {
   req.logout();
   res.redirect('/dashboard/login');
