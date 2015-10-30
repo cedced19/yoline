@@ -71,6 +71,9 @@ angular.module('Dashboard', ['ngRoute', 'ngSanitize', 'ngCookies', 'textAngular'
         $http.get('/api/version').success(function (data) {
             $scope.version = data;
         });
+        $http.get('/api/informations').success(function (data) {
+            $scope.informations = data;
+        });
 }])
 .controller('AccountCtrl', ['$scope', '$cookieStore', '$rootScope', function($scope, $cookieStore, $rootScope) {
         $rootScope.nav = {
