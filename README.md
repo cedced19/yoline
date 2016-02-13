@@ -9,9 +9,9 @@ It is __the smallest__ of the blog we can do, and that's the goal!
 There will be a [CLI](https://en.wikipedia.org/wiki/Command-line_interface) to create your own blog.
 
 In the `content` folder you can create files: each file contains a post.
-You can see [this]() file for example.
+You can see [this](https://github.com/cedced19/yoline-example/blob/master/content/11-02-16.md) file for example.
 
-In the [config/meta.js]() file you can set:
+In the [config/meta.js](https://github.com/cedced19/yoline-example/blob/master/config/meta.js) file you can set:
 * The blog title in `title`
 * Your twitter account in `twitter` for the [SEO](https://en.wikipedia.org/wiki/Search_engine_optimization)
 * The blog description in `description`
