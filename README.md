@@ -1,25 +1,24 @@
-# Yoline
+# Example of a Yoline Blog
 
-__Work in progress!__
+A free and open-source blog based on Node.js.
+It is __the smallest__ of the blog we can do, and that's the goal!
 
-Yoline is a free and open-source content management system (CMS) based on Node.js.
+![](demo.png)
 
-## Why a new CMS?
+## How to configure the blog
+There will be a [CLI](https://en.wikipedia.org/wiki/Command-line_interface) to create your own blog.
 
-I wanted to do blogs for friends with Node.js but I don't really like to use Ghost or other.
+In the `content` folder you can create files: each file contains a post.
+You can see [this]() file for example.
 
-Then I'll do myself my own CMS.
+In the [config/meta.js]() file you can set:
+* The blog title in `title`
+* Your twitter account in `twitter` for the [SEO](https://en.wikipedia.org/wiki/Search_engine_optimization)
+* The blog description in `description`
+* The url of your blog in `url`, it will be important for the SEO
+* The year in `year` for the [copyright](https://en.wikipedia.org/wiki/Copyright)
+* The date format in `french`
 
-I didn't use Browserify and SASS, it will be an example to me.
-
-## Why this beautiful name?
-
-Because _Broccoli_, _Ghost_ or _Brunch_ have shit name.
-
-## What is the frequency of publication?
-
-I think this project will be the last project I will update in my free time.
-
-## API
-
-I think there will be an API like [Learn Memory's API](https://github.com/cedced19/learn-memory#api).
+## Why you choose this beautifull name?
+Yoline is beautiful,  `y` reminds the front-matter in yml.
+But after all, it's a close friend who gave me this name. She will given this name to her future daughter.
