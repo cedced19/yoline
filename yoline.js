@@ -42,7 +42,7 @@ app.use(route.get('/post/:id', function *(id){
 app.use(serve('public'));
 app.use(serve('media'));
 
-app.listen(process.env.PORT || 3000);
+if (!module.parent) app.listen(process.env.PORT || 3000);
 
 fs.watch(contentPath, () => {
   fs.readdir(contentPath, (err, files) => {

@@ -3,6 +3,8 @@
 A free and open-source blog based on Node.js.
 It is __the smallest__ of the blog we can do, and that's the goal!
 
+[![Build Status](https://travis-ci.org/cedced19/yoline-example.svg?branch=master)](https://travis-ci.org/cedced19/yoline-example)
+
 ![](demo.png)
 
 ## How to configure the blog
